@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: 'Baloo Tamma 2', cursive;
+}
+
+html, body{
+    height: 100%;
+}
+
+body {
+    background-image: url("../images/bg2.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#scroller {
+    height: 100%;
+    max-width: 100%;
+    overflow: auto;
+}
+
+#content {
+    width: 90%;
+    /* height: 90vh; */
+    max-width: 1200px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 40px 30px 0;
+    min-height: 855px;
+    margin: 35px auto;
+}
+
+#city-input {
+    width: 70%;
+    height: 57px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(255,255,255,0.7);
+    margin: 2vh auto 8vh;
+    display: block;
+    padding: 6px 0 0;
+    outline: none;
+    text-align: center;
+    font-size: 24px;
+    text-transform: capitalize;
+    transition: background-color 0.5s ease;
+    font-weight: 700;
+}
+
+#city-input:focus {
+    background: rgba(255,255,255, 1);
+}
+
+
+/**************************************************************** 
+* PULSE ANIMATION
+****************************************************************/
+.pulse {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 8);
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+	}
+
+	70% {
+		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+	}
+}
+
+
+/**************************************************************** 
+* CURRENT WEATHER
+****************************************************************/
+#current-weather-box {
+    color: #fff;
+    display: flex;
+}
+
+/* Macro info box */
+#current-weather-box .macro-info-box {
+    margin-left: 2vw;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+#current-weather-box .macro-info-box .temp-box {
+    display: flex;
+}
+
+#current-weather-box .macro-info-box .temp-box i {
+    font-size: 65px;
+}
+
+#current-weather-box .macro-info-box .temp-box .temp {
+    font-size: 85px;
+    padding-left: 1vw;
+    line-height: 9vh;
+}
+
+/* Detail info box */
+#current-weather-box .detail-info-box {
+    flex-grow: 1;
+    flex-basis: 0;
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+    min-width: 200px;
+    text-align: center;
+}
+
+
+/* Time info box */
+#current-weather-box .time-info-box {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 140px;
+    text-align: center;
+}
+
+#current-weather-box .time-info-box .time-btn-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#current-weather-box .time-info-box .time-btn-box .time-btn {
+    background: rgba(255, 255, 255, 0.5);
+    color: #000;
+    border-radius: 6px;
+    padding: 5px 10px 2px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0.2vw;
+    cursor: pointer;
+}
+
+#current-weather-box .time-info-box .time-btn-box .time-btn.active {
+    background: #fff;
+}
+
+
+/**************************************************************** 
+* FORECAST
+****************************************************************/
+#forecast-box {
+    color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+#forecast-box .forecast-day {
+    text-align: center;
+    font-size: 1.7rem;
+    padding: 30px;
+}
+
+#forecast-box .forecast-day p {
+    margin-bottom: 0.5rem;
+}
+
+#forecast-box .forecast-day i {
+    font-size: 6rem;
+    padding-bottom: 1.5vw;
+}
+
+#forecast-box .forecast-day .max-temp {
+    padding: 0 0.2rem;
+}
+
+#forecast-box .forecast-day .min-temp {
+    padding: 0 0.2rem;
+}
+
+/**************************************************************** 
+* RAIN TEXT ALERT
+****************************************************************/
+#rain-text-alert {
+    color: #fff;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 40px;
+}
+
+
+
+/**************************************************************** 
+* RESPONSIVE
+****************************************************************/
+
+@media only screen and (min-width: 920px) {
+
+}
