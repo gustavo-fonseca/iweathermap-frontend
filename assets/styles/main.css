@@ -1,11 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700&display=swap');
+html {
+    font-size: 62.5%;
+}
 
-* {
+html,
+body {
+    height: 100%;
     font-family: 'Baloo Tamma 2', cursive;
 }
 
-html, body{
-    height: 100%;
+.h1,
+h1 {
+    font-size: 4.5rem;
+}
+
+.h2,
+h2 {
+    font-size: 4rem;
+}
+
+.h3,
+h3 {
+    font-size: 3.5rem;
+}
+
+.h4,
+h4 {
+    font-size: 3.0rem;
+}
+
+.h5,
+h5 {
+    font-size: 2.5rem;
+}
+
+p,
+label,
+span {
+    font-size: 1.55rem;
 }
 
 body {
@@ -13,6 +45,7 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-size: 1.55rem;
 }
 
 #scroller {
@@ -23,73 +56,76 @@ body {
 
 #content {
     width: 90%;
-    /* height: 90vh; */
     max-width: 1200px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
-    padding: 40px 30px 0;
-    min-height: 855px;
-    margin: 35px auto;
+    padding: 6rem 4.0rem;
+    margin: 35px auto 0;
 }
+
+
+/**************************************************************** 
+* CITY SEARCH INPUT
+****************************************************************/
 
 #city-input {
     width: 70%;
     height: 57px;
     border-radius: 10px;
     border: none;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     margin: 2vh auto 8vh;
     display: block;
-    padding: 6px 0 0;
+    padding: 0.6rem 0 0;
     outline: none;
     text-align: center;
-    font-size: 24px;
+    font-size: 2.4rem;
     text-transform: capitalize;
     transition: background-color 0.5s ease;
     font-weight: 700;
 }
 
 #city-input:focus {
-    background: rgba(255,255,255, 1);
+    background: rgba(255, 255, 255, 1);
 }
 
-
-/**************************************************************** 
-* PULSE ANIMATION
-****************************************************************/
 .pulse {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 8);
-	animation: pulse 2s infinite;
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
-	}
-
-	70% {
-		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-	}
-
-	100% {
-		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-	}
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
 }
 
 
 /**************************************************************** 
 * CURRENT WEATHER
 ****************************************************************/
+
 #current-weather-box {
     color: #fff;
     display: flex;
+    flex-wrap: wrap;
 }
 
+
 /* Macro info box */
+
 #current-weather-box .macro-info-box {
-    margin-left: 2vw;
-    flex-grow: 1;
-    flex-basis: 0;
+    /* margin-left: 2vw; */
+    /* flex-grow: 1;
+    flex-basis: 0; */
+    flex: 1 0 33.3333333%;
+    padding-left: 2.0rem
 }
 
 #current-weather-box .macro-info-box .temp-box {
@@ -97,32 +133,40 @@ body {
 }
 
 #current-weather-box .macro-info-box .temp-box i {
-    font-size: 65px;
+    font-size: 6.5rem;
 }
 
 #current-weather-box .macro-info-box .temp-box .temp {
-    font-size: 85px;
-    padding-left: 1vw;
+    font-size: 8.5rem;
+    padding-left: 2rem;
     line-height: 9vh;
 }
 
+
 /* Detail info box */
+
 #current-weather-box .detail-info-box {
-    flex-grow: 1;
-    flex-basis: 0;
-    font-size: 1.5rem;
-    line-height: 1.7rem;
-    min-width: 200px;
+    /* flex-grow: 1;
+    flex-basis: 0; */
+    /* min-width: 200px; */
     text-align: center;
+    flex: 1 0 33.3333333%;
+}
+
+#current-weather-box .detail-info-box h5 {
+    margin-bottom: 1.2rem;
 }
 
 
 /* Time info box */
+
 #current-weather-box .time-info-box {
-    flex-grow: 1;
-    flex-basis: 0;
-    height: 140px;
+    /* flex-grow: 1;
+    flex-basis: 0; */
+    /* height: 140px; */
     text-align: center;
+    flex: 1 0 33.3333333%;
+    margin-bottom: 2rem;
 }
 
 #current-weather-box .time-info-box .time-btn-box {
@@ -136,7 +180,7 @@ body {
     background: rgba(255, 255, 255, 0.5);
     color: #000;
     border-radius: 6px;
-    padding: 5px 10px 2px;
+    padding: 0.5rem 1.0rem 0.2rem;
     margin-bottom: 10px;
     font-weight: 500;
     text-align: center;
@@ -152,54 +196,99 @@ body {
 /**************************************************************** 
 * FORECAST
 ****************************************************************/
+
 #forecast-box {
     color: #fff;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding-bottom: 15px;
+    padding-bottom: 1.5rem;
 }
 
 #forecast-box .forecast-day {
     text-align: center;
     font-size: 1.7rem;
-    padding: 30px;
+    padding: 3.0rem;
 }
 
-#forecast-box .forecast-day p {
+#forecast-box .forecast-day .label,
+#forecast-box .forecast-day .temp span {
     margin-bottom: 0.5rem;
+    font-size: 2.6rem
 }
 
 #forecast-box .forecast-day i {
-    font-size: 6rem;
-    padding-bottom: 1.5vw;
+    font-size: 9rem;
+    padding-bottom: 2rem;
 }
 
-#forecast-box .forecast-day .max-temp {
-    padding: 0 0.2rem;
-}
-
+#forecast-box .forecast-day .max-temp,
 #forecast-box .forecast-day .min-temp {
-    padding: 0 0.2rem;
+    padding: 0 0.8rem;
 }
+
 
 /**************************************************************** 
 * RAIN TEXT ALERT
 ****************************************************************/
+
 #rain-text-alert {
     color: #fff;
     text-align: center;
     text-decoration: underline;
-    font-size: 40px;
+    font-size: 4.0rem;
 }
-
 
 
 /**************************************************************** 
 * RESPONSIVE
 ****************************************************************/
 
-@media only screen and (min-width: 920px) {
+@media only screen and (max-width: 1100px) {
+    html {
+        font-size: 50%;
+    }
+}
 
+@media only screen and (max-width: 920px) {
+    html {
+        font-size: 45%;
+    }
+    #city-input {
+        width: 80%
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    html {
+        font-size: 40%;
+    }
+    #city-input {
+        width: 100%
+    }
+}
+
+@media only screen and (max-width: 690px) {
+    #current-weather-box .time-info-box .time-btn-box .time-btn {
+        padding: 1rem 1.2rem 0.4rem;
+    }
+    .detail-info-box {
+        text-align: right !important;
+        padding-right: 2.0rem;
+        padding-bottom: 2rem;
+    }
+    #forecast-box .forecast-day {
+        flex: 1 1 33.3333333%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #content {
+        width: 100%;
+        min-height: 100%;
+        margin-top: 0;
+        border-radius: 0;
+    }
 }
