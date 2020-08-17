@@ -9,93 +9,77 @@
 </head>
 
 <body>
+    <div id="focus-out" tabindex="0"></div>
     <div id="scroller">
         <section id="content">
-            <input type="text" id="city-input" class="pulse" placeholder="City name">
 
-            <dev id="current-weather-box">
+            <!-- city input -->
+            <div id="city-input-box">
+                <input type="text" id="city-input" class="pulse" placeholder="City name" v-model="city.model" v-on:keyup="city_autocomplete_search" v-on:keyup.Enter="city_autocomplete_submit">
+
+                <ul class="auto-complete-list" v-if="city.model_autocomplete.length">
+                    <li v-for="(city_data, index) in city.model_autocomplete" v-on:click="city_autocomplete_select(index)" v-bind:class="{hover: index == city.model_autocomplete_hover}">{{ city_data.name }}, {{ city_data.country }}</li>
+                </ul>
+            </div>
+
+            <!-- loading -->
+            <div id="loading" v-if="!loaded"></div>
+
+            <!-- selected forecast day info -->
+            <div id="current-weather-box" v-if="loaded">
                 <div class="macro-info-box">
-                    <h1 class="place">Aracaju - SE </h1>
-                    <h5 class="datetime">Saturday, 15:00</h5>
-
+                    <h1 class="place">{{ city.data.name }}, {{ city.data.country }}</h1>
+                    <h5 class="datetime">
+                        {{ forecast_selected_day_time.weekday }}, {{ forecast_selected_day_time.datetime | datetime_to_time }}
+                    </h5>
                     <h1 class="temp-box">
-                        <i class="fas fa-cloud-sun"></i>
-                        <p class="temp">28°C</p>
+                        <i class="fas" v-bind:class="forecast_selected_day_time.weather_icon"></i>
+                        <p class="temp">{{ forecast_selected_day_time.temp | to_int }}°C</p>
                     </h1>
                 </div>
                 <div class="detail-info-box">
-                    <h5>Max: 28°</h5>
-                    <h5>Min: 28°</h5>
-                    <h5>Feels like: 28°</h5>
-                    <h5>Humidity: 68%</h5>
+                    <h5>Max: {{ forecast_selected_day_time.temp_max | to_int }}°</h5>
+                    <h5>Min: {{ forecast_selected_day_time.temp_min | to_int }}°</h5>
+                    <h5>Feels like: {{ forecast_selected_day_time.feels_like | to_int }}°</h5>
+                    <h5>Humidity: {{ forecast_selected_day_time.humidity | to_int }}%</h5>
                 </div>
 
                 <div class="time-info-box">
                     <h5>Select the time</h5>
                     <div class="time-btn-box">
-                        <div class="time-btn">00:00</div>
-                        <div class="time-btn">03:00</div>
-                        <div class="time-btn active">06:00</div>
-                        <div class="time-btn">09:00</div>
-                        <div class="time-btn">12:00</div>
-                        <div class="time-btn">15:00</div>
-                        <div class="time-btn">18:00</div>
-                        <div class="time-btn">21:00</div>
+                        <div class="time-btn" v-bind:class="{ active: index == forecast.selected_time_index }" v-for="(forecast_data, index) in forecast_selected_day" v-on:click="forecast_time_select(index)">
+                            {{ forecast_data.datetime | datetime_to_time }}
+                        </div>
                     </div>
                 </div>
-            </dev>
+            </div>
 
-
-            <div id="forecast-box">
-                <div class="forecast-day">
-                    <p class="label">Sunday</p>
-                    <i class="fas fa-cloud-sun"></i>
+            <!-- forecast days -->
+            <div id="forecast-box" v-if="loaded">
+                <div class="forecast-day" v-bind:class="{ active: index == forecast.selected_day }" v-for="(forecast_data, index) in forecast.days" v-on:click="forecast_day_select(index)">
+                    <p class="label">{{ forecast_data | get_forecast_attr_default_time("weekday") }}</p>
+                    <i class="fas" v-bind:class="forecast_data | get_forecast_attr_default_time('weather_icon')"></i>
                     <p class="temp">
-                        <span class="max-temp">28°</span>
-                        <span class="min-temp">22°</span>
-                    </p>
-                </div>
-                <div class="forecast-day">
-                    <p class="label">Sunday</p>
-                    <i class="fas fa-cloud-sun"></i>
-                    <p class="temp">
-                        <span class="max-temp">28°</span>
-                        <span class="min-temp">22°</span>
-                    </p>
-                </div>
-                <div class="forecast-day">
-                    <p class="label">Sunday</p>
-                    <i class="fas fa-cloud-sun"></i>
-                    <p class="temp">
-                        <span class="max-temp">28°</span>
-                        <span class="min-temp">22°</span>
-                    </p>
-                </div>
-                <div class="forecast-day">
-                    <p class="label">Sunday</p>
-                    <i class="fas fa-cloud-sun"></i>
-                    <p class="temp">
-                        <span class="max-temp">28°</span>
-                        <span class="min-temp">22°</span>
-                    </p>
-                </div>
-                <div class="forecast-day">
-                    <p class="label">Sunday</p>
-                    <i class="fas fa-cloud-sun"></i>
-                    <p class="temp">
-                        <span class="max-temp">28°</span>
-                        <span class="min-temp">22°</span>
+                        <span class="max-temp">{{ forecast_data | get_forecast_attr_default_time("temp_max") | to_int }}°</span>
+                        <span class="min-temp">{{ forecast_data | get_forecast_attr_default_time("temp_min") | to_int }}°</span>
                     </p>
                 </div>
             </div>
 
-            <h2 id="rain-text-alert">
-                You should take an umbrella in these days: <br> Monday, Tuesday and Friday
+            <!-- rain text alert -->
+            <h2 id="rain-text-alert" v-if="loaded">
+                You should take an umbrella in these days: <br>
+                <keep-alive>{{ forecast.rain_days_text }}</keep-alive>
             </h2>
 
         </section>
     </div>
 
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- production version, optimized for size and speed -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/scripts/main.js"></script>
 </body>
 

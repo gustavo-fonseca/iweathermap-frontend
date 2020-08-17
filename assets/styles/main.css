@@ -55,7 +55,7 @@ html {
 }
 
 body {
-    background-image: url("../images/bg2.jpg");
+    background-image: url("../images/bg-1.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -84,6 +84,12 @@ body {
 * CITY SEARCH INPUT
 ****************************************************************/
 
+#city-input-box {
+    width: 70%;
+    margin: 2rem auto 8rem;
+    position: relative;
+}
+
 #city-input {
     background-color: rgba(255, 255, 255, 0.7);
     border: none;
@@ -92,13 +98,13 @@ body {
     font-size: 2.4rem;
     font-weight: 700;
     height: 5.7rem;
-    margin: 2rem auto 8rem;
+    /* margin: 2rem auto 8rem; */
     outline: none;
     padding: 0.6rem 0 0;
     text-align: center;
     text-transform: capitalize;
     transition: background-color 0.5s ease;
-    width: 70%;
+    width: 100%;
 }
 
 #city-input:focus {
@@ -122,6 +128,27 @@ body {
     }
 }
 
+#city-input-box .auto-complete-list {
+    list-style: none;
+    background: #fff;
+    width: 100%;
+    position: absolute;
+    border-radius: 1.0rem;
+    margin-top: 0.5rem;
+    padding: 0;
+}
+
+#city-input-box .auto-complete-list li {
+    padding: 1.1rem 3.5rem 0.8rem;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+#city-input-box .auto-complete-list li:hover,
+#city-input-box .auto-complete-list li.hover {
+    background: rgba(0, 0, 0, 0.2)
+}
+
 
 /**************************************************************** 
 * CURRENT WEATHER
@@ -139,6 +166,10 @@ body {
 #current-weather-box .macro-info-box {
     flex: 1 0 33.3333333%;
     padding-left: 2.0rem;
+}
+
+#current-weather-box .macro-info-box .place {
+    text-transform: capitalize;
 }
 
 #current-weather-box .macro-info-box .temp-box {
@@ -185,6 +216,7 @@ body {
 
 #current-weather-box .time-info-box .time-btn-box .time-btn {
     background: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease;
     border-radius: 0.6rem;
     color: #000;
     cursor: pointer;
@@ -195,7 +227,8 @@ body {
     text-align: center;
 }
 
-#current-weather-box .time-info-box .time-btn-box .time-btn.active {
+#current-weather-box .time-info-box .time-btn-box .time-btn.active,
+#current-weather-box .time-info-box .time-btn-box .time-btn:hover {
     background: #fff;
 }
 
@@ -216,8 +249,20 @@ body {
 
 #forecast-box .forecast-day {
     font-size: 1.7rem;
-    padding: 0 3.0rem;
+    padding: 1rem 3.0rem 0;
+    margin: 0 0.5rem;
     text-align: center;
+    cursor: pointer;
+    border-radius: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+#forecast-box .forecast-day.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#forecast-box .forecast-day:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 #forecast-box .forecast-day .label,
@@ -245,7 +290,82 @@ body {
     color: #fff;
     font-size: 4.0rem;
     text-align: center;
-    text-decoration: underline;
+}
+
+
+/**************************************************************** 
+* LOADING
+****************************************************************/
+
+#loading {
+    background: url(../images/loading.svg);
+    width: 12.0rem;
+    height: 12.0rem;
+    margin: 22rem auto;
+    background-position: center;
+    background-size: contain;
+}
+
+
+/**************************************************************** 
+* BG ANIMATION
+****************************************************************/
+
+
+/* preload images */
+
+body::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
+    content: url("../images/bg-1.jpg") url("../images/bg-2.jpg");
+}
+
+@keyframes bgswap {
+    0% {
+        background-image: url("../images/bg-1.jpg");
+    }
+    50% {
+        background-image: url("../images/bg-1.jpg");
+    }
+    55% {
+        background-image: url("../images/bg-2.jpg");
+    }
+    95% {
+        background-image: url("../images/bg-2.jpg");
+    }
+    100% {
+        background-image: url("../images/bg-1.jpg");
+    }
+}
+
+body {
+    background-color: #fff;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -webkit-animation-duration: 40s;
+    -moz-animation-duration: 40s;
+    -o-animation-duration: 40s;
+    -ms-animation-duration: 40s;
+    animation-duration: 40s;
+    -webkit-animation-name: bgswap;
+    -moz-animation-name: bgswap;
+    -o-animation-name: bgswap;
+    -ms-animation-name: bgswap;
+    animation-name: bgswap;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    -ms-animation-timing-function: linear;
+    animation-timing-function: linear;
 }
 
 

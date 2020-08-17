@@ -1,0 +1,9 @@
+{
+    "forecast_api_url": "http://localhost:8000/",
+    "city_default_data": {
+        "code": "3451328",
+        "name": "Ribeirão Preto",
+        "state": "",
+        "country": "BR"
+    }
+}
