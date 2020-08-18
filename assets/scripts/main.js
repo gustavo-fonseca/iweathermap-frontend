@@ -46,6 +46,7 @@ var app = new Vue({
         },
 
         loaded: false,
+        not_found: false,
 
         forecast_api_url: '',
 
@@ -58,10 +59,18 @@ var app = new Vue({
 
         forecast_selected_day_time: function() {
             return this.forecast.days[this.forecast.selected_day][this.forecast.selected_time_index];
+        },
+
+        is_ready: function() {
+            return this.loaded && !this.not_found;
         }
     },
 
     methods: {
+
+        forecast_selected_day_time_attr: function(attr_name) {
+            return this.forecast.days[this.forecast.selected_day][this.forecast.selected_time_index][attr_name];
+        },
 
         // select the time of current forecast day
         forecast_time_select: function(value) {
@@ -155,13 +164,21 @@ var app = new Vue({
                 .get(this.forecast_api_url + 'forecast/next-five-days?city_name=' + this.city.data.name)
                 .then(response => {
                     this.forecast.days = response.data.data;
-                    // get first forecast key
-                    this.forecast.selected_day = Object.keys(this.forecast.days)[0];
+
+                    if (Object.keys(this.forecast.days).length) {
+                        // get first forecast key
+                        this.forecast.selected_day = Object.keys(this.forecast.days)[0];
+
+                        // get raining days
+                        this.forecast.rain_days_text = response.data.raining_days_text;
+
+                        this.not_found = false;
+                    } else {
+                        this.not_found = true;
+                    }
+
                     // finish loading
                     this.loaded = true;
-
-                    // 
-                    this.forecast.rain_days_text = response.data.raining_days_text
                 })
                 .catch(error => console.log(error));
 

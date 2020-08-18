@@ -28,9 +28,10 @@
 
             <!-- loading -->
             <div id="loading" v-if="!loaded"></div>
+            <div id="not-found" v-if="not_found && loaded">City not found! <br> Please try again.</div>
 
             <!-- selected forecast day info -->
-            <div id="current-weather-box" v-if="loaded">
+            <div id="current-weather-box" v-if="is_ready">
                 <div class="macro-info-box">
                     <h1 class="place">{{ city.data.name }}, {{ city.data.country }}</h1>
                     <h5 class="datetime">
@@ -59,7 +60,7 @@
             </div>
 
             <!-- forecast days -->
-            <div id="forecast-box" v-if="loaded">
+            <div id="forecast-box" v-if="is_ready">
                 <div class="forecast-day" v-bind:class="{ active: index == forecast.selected_day }" v-for="(forecast_data, index) in forecast.days" v-on:click="forecast_day_select(index)">
                     <p class="label">{{ forecast_data | get_forecast_attr_default_time("weekday") }}</p>
                     <i class="fas" v-bind:class="forecast_data | get_forecast_attr_default_time('weather_icon')"></i>
@@ -71,7 +72,7 @@
             </div>
 
             <!-- rain text alert -->
-            <h2 id="rain-text-alert" v-if="loaded">
+            <h2 id="rain-text-alert" v-if="is_ready">
                 You should take an umbrella in these days: <br>
                 <keep-alive>{{ forecast.rain_days_text }}</keep-alive>
             </h2>
@@ -80,9 +81,9 @@
     </div>
 
     <!-- development version, includes helpful console warnings -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <!-- production version, optimized for size and speed -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/scripts/main.js"></script>
 </body>
