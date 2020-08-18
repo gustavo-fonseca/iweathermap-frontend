@@ -161,7 +161,7 @@ var app = new Vue({
             this.loaded = false;
 
             axios
-                .get(this.forecast_api_url + 'forecast/next-five-days?city_name=' + this.city.data.name)
+                .get(this.forecast_api_url + 'forecast/next-five-days?city_id=' + this.city.data.code)
                 .then(response => {
                     this.forecast.days = response.data.data;
 
