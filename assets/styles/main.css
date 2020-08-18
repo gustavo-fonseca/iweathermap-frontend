@@ -71,11 +71,11 @@ body {
 }
 
 #content {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     border-radius: 1.5rem;
     margin: 3.5rem auto 0;
     max-width: 1200px;
-    padding: 6rem 4.0rem;
+    padding: 4rem 4.0rem;
     width: 90%;
 }
 
@@ -86,7 +86,7 @@ body {
 
 #city-input-box {
     width: 70%;
-    margin: 2rem auto 8rem;
+    margin: 2rem auto 6rem;
     position: relative;
 }
 
