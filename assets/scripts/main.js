@@ -9,33 +9,6 @@ Number.prototype.padLeft = function(n, str) {
 }
 
 
-/** 
- * Words Separator
- * @param {[String]} list list of words
- * @param {String} separator word separator
- * @param {String} end_separator word end separator
- * @return {String} list of words separated. e.g. "1, 2, 3 and 4"
- **/
-function words_separator(list, separator, end_separator) {
-    let text = "";
-
-    list.forEach((word, index) => {
-        if (index == 0) {
-            // if the current iteration is the first
-            text += word;
-        } else if (index < list.length - 1) {
-            // if the current iteration isn't the first and the last
-            text += separator + word;
-        } else {
-            // if the current iteration is the last
-            text += end_separator + word;
-        }
-    });
-
-    return text;
-}
-
-
 /**
  * Get Timestamp
  * @return {String} current timestamp e.g. "1597691733375"
