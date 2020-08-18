@@ -179,28 +179,18 @@ var app = new Vue({
             this.loaded = false;
 
             axios
-                .get(this.forecast_api_url + 'forecast/next-days-rain-chances?city_name=' + this.city.data.name)
+                .get(this.forecast_api_url + 'forecast/next-five-days?city_name=' + this.city.data.name)
                 .then(response => {
-                    // compute raining days
-                    let weekdays = response.data.map(data => data['weekday']);
-                    this.forecast.rain_days_text = words_separator(weekdays, ', ', ' and ');
+                    this.forecast.days = response.data.data;
+                    // get first forecast key
+                    this.forecast.selected_day = Object.keys(this.forecast.days)[0];
+                    // finish loading
+                    this.loaded = true;
+
+                    // 
+                    this.forecast.rain_days_text = response.data.raining_days_text
                 })
-                .catch(error => console.log(error))
-                .then(() => {
-                    // always executed
-                    axios
-                        .get(this.forecast_api_url + 'forecast/next-five-days?city_name=' + this.city.data.name)
-                        .then(response => {
-                            this.forecast.days = response.data;
-                            // get first forecast key
-                            this.forecast.selected_day = Object.keys(this.forecast.days)[0];
-                            // finish loading
-                            this.loaded = true;
-                        })
-                        .catch(error => console.log(error));
-                });
-
-
+                .catch(error => console.log(error));
 
         }
     },
